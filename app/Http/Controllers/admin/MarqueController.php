@@ -28,6 +28,7 @@ class MarqueController extends Controller
         Marque::where('id',$data['marque_id'])->update(['status'=>$status]);
         return response()->json(['status'=>$status,'marque_id'=>$data['marque_id']]);
     }
+    
     public function deletemarques($id)
     {
            Marque::where('id',$id)->delete();

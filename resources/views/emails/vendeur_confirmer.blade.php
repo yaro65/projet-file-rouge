@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <tr><td> Chère : {{$nom}}</td></tr>
+  <table>
+  <tr><td> Chère : {{$nom}}</td></tr>
     <tr><td>&nbsp;</td></tr>
     <tr><td> Votre compte de vendeur est confirmé. <br> Vous pouvez vous connecter et ajouter vos <br>
       détails professionnels personnels et bancaires pour activer votre compte vendeur pour ajouter des produits :-</td></tr>
@@ -21,5 +22,7 @@
     <tr><td>&nbsp;</td></tr>
     <tr><td>Password: ******( choisi par vous)</td></tr>
     <tr><td>Merci cordialement</td></tr>
+  </table>
+   
 </body>
 </html>

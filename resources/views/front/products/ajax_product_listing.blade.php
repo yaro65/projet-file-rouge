@@ -1,4 +1,5 @@
 <?php use App\Models\Product; ?>
+
 <div class="row product-container grid-style">
         @foreach($categoryProducts as $product)
      <div class="product-item col-lg-4 col-md-6 col-sm-6">
@@ -13,10 +14,10 @@
                     @endif
                 </a>
                 <div class="item-action-behaviors">
-                    <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
+                    <a class="item-quick-look" data-toggle="modal" href="#quick-view">Aperçu rapide</a>
                     <a class="item-mail" href="javascript:void(0)">Mail</a>
                     <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                    <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                    <a class="item-addCart" href="javascript:void(0)">Ajouter à la liste de souhaits</a>
                 </div>
             </div>
             <div class="item-content">
@@ -33,7 +34,7 @@
                         </li>
                     </ul>
                     <h6 class="item-title">
-                        <a href="">{{$product['product_name']}}</a>
+                        <a href="{{url('product/'.$product['id'])}}">{{$product['product_name']}}</a>
                     </h6>
                     <div class="item-description">
                         <p>
@@ -68,4 +69,5 @@
         @endif
     </div>
       @endforeach
-  </div>
+</div>
+

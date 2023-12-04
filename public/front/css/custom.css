@@ -1,0 +1,24 @@
+.loader{
+    background-color: rgba(255, 255, 255, 0.8);
+    display: none;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+.loader img{
+    margin-left: 650px;
+    margin-top: 250px;
+    width: 100px;
+    height: 100px;
+}
+@media screen and (max-width: 768px) {
+    .loader img {
+        margin-left: 50%;
+        margin-top: 50%;
+        transform: translate(-50%, -50%);
+        width: 30%;
+        max-width: 100px;
+        height: auto;
+    }
+}

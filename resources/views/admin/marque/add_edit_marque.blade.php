@@ -40,7 +40,7 @@
                                 @foreach($errors->all() as $error)
                                    <li>{{ $error }}</li>
                                    @endforeach
-                                 <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                              </div>

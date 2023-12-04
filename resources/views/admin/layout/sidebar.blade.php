@@ -5,7 +5,7 @@
               style="background:#4B49AC !important ; color: #fff !important;"
             @endif class="nav-link" href="index.html">
               <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Accueil</span>
             </a>
           </li>
           @if(Auth::guard('admin')->user()->type=="vendeur")
@@ -67,6 +67,37 @@
                 style="background: #fff !important; color: #4B49AC !important;" 
                @endif
                 class="nav-link" href="{{url('admin/products')}}">Produits</a></li>
+                <li class="nav-item"> <a
+                @if(Session::get('page') == "coupons")
+              style="background: #4B49AC !important; color: #fff !important;" 
+               @else
+                style="background: #fff !important; color: #4B49AC !important;" 
+               @endif
+                class="nav-link" href="{{url('admin/coupons')}}">Coupons</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a  @if(Session::get('page') == "commandes" )
+              style="background: #4B49AC !important; color: #fff !important;"
+                  @endif
+                class="nav-link" data-toggle="collapse" href="#ui-commandes" aria-expanded="false" aria-controls="ui-commandes">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Gestion Commandes</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-commandes">
+                
+              <ul class="nav flex-column sub-menu"  style="background: #fff !important; color: #4B49AC !important;" >
+                <li class="nav-item"> <a 
+                @if(Session::get('page') == "commandes")
+              style="background: #4B49AC !important; color: #fff !important;" 
+               @else
+                style="background: #fff !important; color: #4B49AC !important;" 
+               @endif
+                class="nav-link" href="{{url('admin/commandes')}}">Commandes</a></li>
+      
               </ul>
             </div>
           </li>
@@ -136,7 +167,7 @@
                @else
                 style="background: #fff !important; color: #4B49AC !important;" 
                @endif
-                class="nav-link" href="{{url('admin/admins/vendeur')}}">Fournisseure</a></li>
+                class="nav-link" href="{{url('admin/admins/vendeur')}}">Vendeur</a></li>
                 <li class="nav-item"> <a 
                 @if(Session::get('page') == "view_all")
               style="background: #4B49AC !important; color: #fff !important;" 
@@ -150,8 +181,9 @@
 
           <li class="nav-item">
             <a
-            @if(Session::get('page') == "sections" || Session::get('page') == "produits")
-            (Session::get('page') == "produits" )
+            @if(Session::get('page') == "sections" || Session::get('page') == "produits"
+             || Session::get('page') == "categories"  || Session::get('page') == "coupons"
+             ||Session::get('page') == "marques") 
               style="background: #4B49AC !important; color: #fff !important;"
                   @endif
             class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false" aria-controls="ui-catalogue">
@@ -194,6 +226,38 @@
                 style="background: #fff !important; color: #4B49AC !important;" 
                @endif
                 class="nav-link" href="{{url('admin/products')}}">Produits</a></li>
+
+                <li class="nav-item"> <a
+                @if(Session::get('page') == "coupons")
+              style="background: #4B49AC !important; color: #fff !important;" 
+               @else
+                style="background: #fff !important; color: #4B49AC !important;" 
+               @endif
+                class="nav-link" href="{{url('admin/coupons')}}">Coupons</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a  @if(Session::get('page') == "commandes" )
+              style="background: #4B49AC !important; color: #fff !important;"
+                  @endif
+                class="nav-link" data-toggle="collapse" href="#ui-commandes" aria-expanded="false" aria-controls="ui-commandes">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Gestion Commandes</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-commandes">
+                
+              <ul class="nav flex-column sub-menu"  style="background: #fff !important; color: #4B49AC !important;" >
+                <li class="nav-item"> <a 
+                @if(Session::get('page') == "commandes")
+              style="background: #4B49AC !important; color: #fff !important;" 
+               @else
+                style="background: #fff !important; color: #4B49AC !important;" 
+               @endif
+                class="nav-link" href="{{url('admin/commandes')}}">Commandes</a></li>
+      
               </ul>
             </div>
           </li>
@@ -202,7 +266,7 @@
             <a  @if(Session::get('page') == "users" || Session::get('page') == "subscribers")
               style="background: #4B49AC !important; color: #fff !important;"
                   @endif
-             class="nav-link" data-toggle="collapse" href="#ui-utilisateurs" aria-expanded="false" aria-controls="ui-utilisateurs">
+                class="nav-link" data-toggle="collapse" href="#ui-utilisateurs" aria-expanded="false" aria-controls="ui-utilisateurs">
               <i class="icon-layout menu-icon"></i>
               <span class="menu-title">Gestion utilisateurs</span>
               <i class="menu-arrow"></i>
@@ -249,81 +313,31 @@
               </ul>
             </div>
           </li>
+
+
+          <li class="nav-item">
+            <a @if(Session::get('page') == "shipping")
+              style="background: #4B49AC !important; color: #fff !important;"
+                  @endif
+            class="nav-link" data-toggle="collapse" href="#ui-shipping" aria-expanded="false" aria-controls="ui-shipping">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Livraison</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-shipping">
+              <ul class="nav flex-column sub-menu"  style="background: #fff !important; color: #4B49AC !important;">
+                <li class="nav-item"> <a
+                @if(Session::get('page') == "shipping")
+              style="background: #4B49AC !important; color: #fff !important;" 
+               @else
+                style="background: #fff !important; color: #4B49AC !important;" 
+               @endif
+                class="nav-link" href="{{url('shipping-charges')}}">Frais</a></li>
+              </ul>
+            </div>
+          </li>
           @endif
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Form elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Charts</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Tables</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Icons</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-              <i class="icon-ban menu-icon"></i>
-              <span class="menu-title">Error pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="error">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-              </ul>
-            </div>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="pages/documentation/documentation.html">
               <i class="icon-paper menu-icon"></i>

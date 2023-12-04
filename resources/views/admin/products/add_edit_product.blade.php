@@ -6,7 +6,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h4 class="font-weight-bold">Products</h4>
+                  <h4 class="font-weight-bold">Produits</h4>
                   <!-- <h6 class="font-weight-normal mb-0">Modifier le mot de passe</h6> -->
                 </div>
                 <div class="col-12 col-xl-4">
@@ -37,7 +37,7 @@
                                 @foreach($errors->all() as $error)
                                    <li>{{ $error }}</li>
                                    @endforeach
-                                 <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                              </div>
@@ -90,34 +90,40 @@
                              </div>
 
                              <div class="form-group">
-                              <label for="product_code">Produit code</label>
-                                <input type="text" class="form-control" id="product_code" name="product_code"  placeholder="Entrer le nom du produit"
+                              <label for="product_code">Code du produit</label>
+                                <input type="text" class="form-control" id="product_code" name="product_code"  placeholder="Entrer le Code du produit"
                                 @if(!empty($product['product_code']) ) value="{{$product['product_code']}}" @else value="{{old('product_code')}}" @endif>
                              </div>
 
                              <div class="form-group">
-                              <label for="product_color">Produit color</label>
-                                <input type="text" class="form-control" id="product_color" name="product_color" color="product_color" placeholder="Entrer le nom du produit"
+                              <label for="product_color">Couleur du produit</label>
+                                <input type="text" class="form-control" id="product_color" name="product_color" color="product_color" placeholder="Entrer la Couleur du produit"
                                 @if(!empty($product['product_color']) ) value="{{$product['product_color']}}" @else value="{{old('product_color')}}" @endif>
                              </div>
 
                              <div class="form-group">
-                              <label for="product_price'">Produit prise</label>
-                                <input type="text" class="form-control" id="product_price" name="product_price"  placeholder="Entrer le nom du produit"
+                              <label for="product_price'">Prix du produit</label>
+                                <input type="text" class="form-control" id="product_price" name="product_price"  placeholder="Entrer le Prix du produit"
                                 @if(!empty($product['product_price']) ) value="{{$product['product_price']}}" @else value="{{old('product_price')}}" @endif>
                              </div>
 
                              
                              <div class="form-group">
-                              <label for="product_discount">Produit discount</label>
-                                <input type="text" class="form-control" id="product_discount" name="product_discount"  placeholder="Entrer le nom du produit"
+                              <label for="product_discount">Réduction sur le produit</label>
+                                <input type="text" class="form-control" id="product_discount" name="product_discount"  placeholder="Entrer la Réduction sur le produit"
                                 @if(!empty($product['product_discount']) ) value="{{$product['product_discount']}}" @else value="{{old('product_discount')}}" @endif>
                              </div>
 
                              <div class="form-group">
-                              <label for="product_weight">Produit weight</label>
-                                <input type="text" class="form-control" id="product_weight"  name="product_weight"  placeholder="Entrer le nom du produit"
+                              <label for="product_weight">poids du produit</label>
+                                <input type="text" class="form-control" id="product_weight"  name="product_weight"  placeholder="Entrer le poids du produit"
                                 @if(!empty($product['product_weight']) ) value="{{$product['product_weight']}}" @else value="{{old('product_weight')}}" @endif>
+                             </div>
+
+                             <div class="form-group">
+                              <label for="group_code">code de groupe</label>
+                                <input type="text" class="form-control" id="group_code"  name="group_code"  placeholder="Entrer le code de groupe"
+                                @if(!empty($product['group_code']) ) value="{{$product['group_code']}}" @else value="{{old('group_code')}}" @endif>
                              </div>
 
                              <div class="form-group">
@@ -148,31 +154,13 @@
                              </div>
 
                              <div class="form-group">
-                              <label for="meta_title">Meta titre</label>
-                                <input type="text" class="form-control" id="meta_title" name="meta_title" placeholder="Entrer le Grand titre"
-                                @if(!empty($product['meta_title'])) value="{{$product['meta_title']}}" @else value="{{old('meta_title')}}" @endif>
-                             </div>
-
-                             <div class="form-group">
-                              <label for="meta_description">Grand description</label>
-                                <input type="text" class="form-control" id="meta_description" name="meta_description" placeholder="Entrer le Grand description"
-                                @if(!empty($product['meta_description'])) value="{{$product['grand_titre']}}" @else value="{{old('meta_description')}}" @endif>
-                             </div>
-
-                             <div class="form-group">
-                                 <label for="meta_keywords">meta keywords</label>
-                                 <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" placeholder="Categorie remise"
-                                @if(!empty($product['meta_keywords'])) value="{{$product['meta_keywords']}}" @else value="{{old('meta_keywords')}}" @endif>
-                             </div>
-
-                             <div class="form-group">
-                                   <label for="is_featurred">is featured</label>
+                                   <label for="is_featurred">Est en vedette</label>
                                     <input type="checkbox" name="is_featurred" id="is_featurred" value="Yes"
                                    @if(!empty($product['is_featurred']) && $product['is_featurred']=="Yes" ) checked="" @endif >                                                               
                               </div>
 
                               <div class="form-group">
-                                   <label for="is_bestseller">Best Sellers</label>
+                                   <label for="is_bestseller">meilleure vente</label>
                                     <input type="checkbox" name="is_bestseller" id="is_bestseller" value="Yes"
                                    @if(!empty($product['is_bestseller']) && $product['is_bestseller']=="Yes" ) checked="" @endif >                                                               
                               </div>

@@ -11,7 +11,7 @@
                     Add class <code>.table-bordered</code>
                   </p> -->
                   <div class="table-responsive pt-3">
-                    <table class="table table-bordered">
+                    <table id="admins" class="table table-bordered">
                       <thead>
                         <tr>
                           <th>
@@ -33,7 +33,7 @@
                             Image
                           </th>
                           <th>
-                            Status
+                            approuvé
                           </th>
                           <th>
                             Actions
@@ -77,7 +77,7 @@
                              @endif
                           </td>
                           <td>
-                          @if($admin['type']=="fournisseure")
+                          @if($admin['type']=="vendeur")
                           <a href="{{ url('admin/view-mdifier-fournisseur/'.$admin['id'])}}">
                           <i  style="font-size: 25px;" class="mdi mdi-file-document"></i>
                           </a>

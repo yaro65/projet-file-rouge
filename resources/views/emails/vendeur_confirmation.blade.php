@@ -6,11 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <tr><td> Chère : {{$nom}}</td></tr>
-    <tr><td>&nbsp;</td></tr>
-    <tr><td> Veuillez cliquer sur le lien ci-dessous pour confirmer votre compte vendeur :-</td></tr>
-    <tr><td> <a href="{{url('vendeur/confirm/'.$code)}}"></a>{{url('vendeur/confirm/'.$code)}}</td></tr>
-    <tr><td>&nbsp;</td></tr>
-    <tr><td>Merci cordialement</td></tr>
+   <table>
+        <tr><td>Chère : {{$nom}}</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>Veuillez cliquer sur le lien ci-dessous pour confirmer votre compte vendeur :</td></tr>
+        <tr><td><a href="{{url('vendeur/confirm/'.$code)}}">{{url('vendeur/confirm/'.$code)}}</a></td></tr>
+        <tr><td>Merci cordialement</td></tr>
+    </table>
 </body>
 </html>

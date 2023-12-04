@@ -37,14 +37,14 @@
                          @if (Session::has('error_message'))
                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>Error:</strong> {{ Session::get('error_message')}}
-                            <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                <span aria-hidden="true">&times;</span>
                             </button>
                          </div>
                          @endif
                           @if (session('success'))
                              <div class="alert alert-success">
-                                <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                             <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                               {{ session('success') }}
@@ -83,7 +83,7 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="fournisseure_address" name="fournisseure_address" placeholder=""
-                      value="{{$fournisseureDetail['address']}}" >
+                      value="{{$vendeurDetails['address']}}" >
                       <div id="check_password"></div>
                     <div class="form-group">
 
@@ -95,7 +95,7 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="fournisseure_ville" name="fournisseure_ville" placeholder=""
-                      value="{{$fournisseureDetail['ville']}}" >
+                      value="{{$vendeurDetails['ville']}}" >
                       <div id="check_password"></div>
                     <div class="form-group">
 
@@ -107,7 +107,7 @@
                            </div>
                       @enderror -->
                       <input type="text" class="form-control" id="fournisseure_secteur" name="fournisseure_secteur" placeholder=""
-                      value="{{$fournisseureDetail['secteur']}}" >
+                      value="{{$vendeurDetails['secteur']}}" >
                       <div id="check_password"></div>
                     <div class="form-group">
 
@@ -119,7 +119,7 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="fournisseure_telephone" name="fournisseure_telephone" placeholder=""
-                      value="{{$fournisseureDetail['telephone']}}" >
+                      value="{{$vendeurDetails['telephone']}}" >
                    
                    
                       <div class="form-group">
@@ -130,7 +130,7 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="fournisseure_email" name="fournisseure_email" placeholder=""
-                      value="{{$fournisseureDetail['email']}}" >
+                      value="{{$vendeurDetails['email']}}" >
                     </div>
 
                     <div class="form-group">
@@ -141,7 +141,7 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="fournisseure_status" name="fournisseure_status" placeholder=""
-                      value="{{$fournisseureDetail['status']}}" >
+                      value="{{$vendeurDetails['status']}}" >
                       <div id="check_password"></div>
                     <div class="form-group">
 
@@ -152,7 +152,6 @@
                            <a target="_blank" href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}">Voir l'image</a>
                            <input type="hidden" name="current_fournisseure_image" value="{{ Auth::guard('admin')->user()->image }}">
                        @endif
-
                     </div>
 
 
@@ -191,92 +190,62 @@
 
                     <div class="form-group">
                       <label for="boutique_nom">Nom</label>
-                      @error('fournisseure_nom')
-                             <div class="text text-danger">
-                             {{$message}}
-                           </div>
-                      @enderror
                       <input type="text" class="form-control" id="nom_de_boutique" name="nom_de_boutique" placeholder=""
-                       @if(isset($fournisseureDetail['nom_de_boutique']))
-                      value="{{$fournisseureDetail['nom_de_boutique']}}" @endif >
+                       @if(isset($vendeurDetails['nom_de_boutique']))
+                      value="{{$vendeurDetails['nom_de_boutique']}}" @endif >
                     <div class="form-group">
 
 
                     <div class="form-group">
                       <label for="boutique_address">Adresse</label>
-                      @error('fournisseure_address')
-                             <div class="text text-danger">
-                             {{$message}}
-                           </div>
-                      @enderror
                       <input type="text" class="form-control" id="adresse_de_boutique" name="adresse_de_boutique" placeholder=""
-                      @if(isset($fournisseureDetail['adresse_de_boutique']))
-                      value="{{$fournisseureDetail['adresse_de_boutique']}}" @endif >
+                      @if(isset($vendeurDetails['adresse_de_boutique']))
+                      value="{{$vendeurDetails['adresse_de_boutique']}}" @endif >
                     <div class="form-group">
 
                     <div class="form-group">
                       <label for="boutique_ville">Ville</label>
-                      @error('fournisseure_ville')
-                             <div class="text text-danger">
-                             {{$message}}
-                           </div>
-                      @enderror
                       <input type="text" class="form-control" id="ville_de_boutique" name="ville_de_boutique" placeholder=""
-                      @if(isset($fournisseureDetail['ville_de_boutique']))
-                      value="{{$fournisseureDetail['ville_de_boutique']}}" @endif >
+                      @if(isset($vendeurDetails['ville_de_boutique']))
+                      value="{{$vendeurDetails['ville_de_boutique']}}" @endif >
                     <div class="form-group">
 
                     <div class="form-group">
                       <label for="boutique_secteur">Secteur</label>
-                      <!-- @error('fournisseure_nom')
-                             <div class="text text-danger">
-                             {{$message}}
-                           </div>
-                      @enderror -->
                       <input type="text" class="form-control" id="secteur_de_boutique" name="secteur_de_boutique" placeholder=""
-                      @if(isset($fournisseureDetail['secteur_de_boutique']))
-                      value="{{$fournisseureDetail['secteur_de_boutique']}}" @endif>
+                      @if(isset($vendeurDetails['secteur_de_boutique']))
+                      value="{{$vendeurDetails['secteur_de_boutique']}}" @endif>
                       <div id="check_password"></div>
                     <div class="form-group">
 
                     <div class="form-group">
                       <label for="boutique_telephone">Telephone</label>
-                      @error('fournisseure_telephone')
-                             <div class="text text-danger">
-                             {{$message}}
-                           </div>
-                      @enderror
                       <input type="text" class="form-control" id="tell_de_boutique" name="tell_de_boutique" placeholder=""
-                      @if(isset($fournisseureDetail['tell_de_boutique']))
-                      value="{{$fournisseureDetail['tell_de_boutique']}}" @endif>
+                      @if(isset($vendeurDetails['tell_de_boutique']))
+                      value="{{$vendeurDetails['tell_de_boutique']}}" @endif>
                       </div>
                     
                       <div class="form-group">
                       <label for="email_de_boutique">Email</label>
-                      @error('fournisseure_email')
-                             <div class="text text-danger">
-                             {{$message}}
-                           </div>
-                      @enderror
                       <input type="text" class="form-control" id="email_de_boutique" name="email_de_boutique" placeholder=""
-                      @if(isset($fournisseureDetail['email_de_boutique']))
-                      value="{{$fournisseureDetail['email_de_boutique']}}" @endif>
+                      @if(isset($vendeurDetails['email_de_boutique']))
+                      value="{{$vendeurDetails['email_de_boutique']}}" @endif>
                     </div>
 
                     <div class="form-group">
                       <label for="document_de_boutique">Document</label>
                       <select class="form-control" name="document_de_boutique" id="document_de_boutique">
                         <option value="passport"  
-                        @if(isset($fournisseureDetail['document_de_boutique']) && $fournisseureDetail['document_de_boutique']=="passport"))
+                        @if(isset($vendeurDetails['document_de_boutique']) && $vendeurDetails['document_de_boutique']=="passport"))
                         selected="" @endif >Passport</option>
                         <option value="cartedidentite" 
-                        @if(isset($fournisseureDetail['document_de_boutique']) && $fournisseureDetail['document_de_boutique']=="cartedidentite"))
+                        @if(isset($vendeurDetails['document_de_boutique']) && $vendeurDetails['document_de_boutique']=="cartedidentite"))
                         selected="" @endif >Carte d'identité</option>
                         <option value="permie"
-                        @if(isset($fournisseureDetail['document_de_boutique']) && $fournisseureDetail['document_de_boutique']=="permie"))
+                        @if(isset($vendeurDetails['document_de_boutique']) && $vendeurDetails['document_de_boutique']=="permie"))
                         selected="" @endif >Permie</option>
                         <option value="cartedelecteur" 
-                        @if(isset($fournisseureDetail['document_de_boutique']) && $fournisseureDetail['document_de_boutique']=="cartedelecteur"))
+                        @if(isset($vendeurDetails['document_de_boutique']) && $vendeurDetails['document_de_boutique']=="cartedelecteur"))
                         selected="" @endif >Carte d'électeur</option>
                       </select>
                       </div>
@@ -284,9 +253,9 @@
                       <div class="form-group">
                       <label for="photos_de_boutique">Boutique photo</label>
                       <input type="file" class="form-control" id="photos_de_boutique" name="photos_de_boutique" placeholder="">
-                          @if(!empty(Auth::guard('admin')->user()->photos_de_boutique))
-                          <a target="_blank" href="{{ url('admin/images/preuve/' . $fournisseureDetail['photos_de_boutique']) }}">Voir l'image</a>
-                           <input type="hidden" name="current_photos_de_boutique" id="current_photos_de_boutique" value="{{$fournisseureDetail['photos_de_boutique']}}">
+                          @if(!empty(Auth::guard('admin')->user()))
+                          <a target="_blank" href="{{ url('admin/images/preuve/' . $vendeurDetails['photos_de_boutique']) }}">Voir l'image</a>
+                           <input type="hidden" name="current_photos_de_boutique" id="current_photos_de_boutique" value="{{$vendeurDetails['photos_de_boutique']}}">
                           @endif
                     </div>
                     <button type="submit" class="btn btn-primary mr-2 mt-3">Submit</button>
@@ -330,8 +299,8 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="nom_du_titulaire_du_compte" name="nom_du_titulaire_du_compte" placeholder=""
-                      @if(isset($fournisseureDetail['nom_du_titulaire_du_compte']))
-                      value="{{$fournisseureDetail['nom_du_titulaire_du_compte']}}" @endif >
+                      @if(isset($vendeurDetails['nom_du_titulaire_du_compte']))
+                      value="{{$vendeurDetails['nom_du_titulaire_du_compte']}}" @endif >
                       <div id="check_password"></div>
                     <div class="form-group">
 
@@ -344,8 +313,8 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="nom_de_la_bank" name="nom_de_la_bank" placeholder=""
-                      @if(isset($fournisseureDetail['nom_de_la_bank']))
-                      value="{{$fournisseureDetail['nom_de_la_bank']}}" @endif>
+                      @if(isset($vendeurDetails['nom_de_la_bank']))
+                      value="{{$vendeurDetails['nom_de_la_bank']}}" @endif>
                       <div id="check_password"></div>
                     <div class="form-group">
 
@@ -357,16 +326,16 @@
                            </div>
                       @enderror
                       <input type="text" class="form-control" id="numero_de_compte" name="numero_de_compte" placeholder=""
-                      @if(isset($fournisseureDetail['numero_de_compte']))
-                      value="{{$fournisseureDetail['numero_de_compte']}}" @endif>
+                      @if(isset($vendeurDetails['numero_de_compte']))
+                      value="{{$vendeurDetails['numero_de_compte']}}" @endif>
                       <div id="check_password"></div>
                     <div class="form-group">
 
                     <div class="form-group">
                       <label for="bank_ifsc_code">Bank ifsc code</label>
                       <input type="text" class="form-control" id="bank_ifsc_code" name="bank_ifsc_code" placeholder=""
-                      @if(isset($fournisseureDetail['bank_ifsc_code']))
-                      value="{{$fournisseureDetail['bank_ifsc_code']}}" @endif>
+                      @if(isset($vendeurDetails['bank_ifsc_code']))
+                      value="{{$vendeurDetails['bank_ifsc_code']}}" @endif>
                     <div class="form-group">
 
                     <button type="submit" class="btn btn-primary mr-2 mt-3">Submit</button>

@@ -28,15 +28,15 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-9 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Add Attributes</h4>
+                  <h4 class="card-title">Ajouter des attributs</h4>
 
                   @if (Session::has('success_message'))
                              <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>Success:</strong> {{ Session::get('success_message')}}
-                                <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                              </div>
@@ -45,7 +45,7 @@
                   @if (Session::has('error_message'))
                              <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Error:</strong> {{ Session::get('error_message')}}
-                                <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                              </div>
@@ -105,13 +105,13 @@
                             ID
                           </th>
                           <th>
-                          Size
+                          Taille
                           </th>
                           <th>
-                          SKU
+                          SKU/Code
                           </th>
                           <th>
-                          Price
+                          Prix
                           </th>
                           <th>
                           Stock

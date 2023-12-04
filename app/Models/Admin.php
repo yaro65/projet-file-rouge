@@ -12,15 +12,15 @@ class Admin extends Authenticatable
     use HasFactory;
     Protected $guard = 'admin';
 
-    public function fournisseureProfile()
+    public function vendeurProfile()
     {
        return $this->belongsTo('App\Models\Vendeur', 'vendeur_id');
     }
-    public function fournisseureBoutique()
+    public function vendeurBoutique()
     {
        return $this->belongsTo('App\Models\BoutiqueVendeur', 'vendeur_id');
     }
-    public function fournisseureBank()
+    public function vendeurBank()
     {
        return $this->belongsTo('App\Models\BankVendeur', 'vendeur_id');
     }

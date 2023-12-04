@@ -6,6 +6,11 @@ $(document).ready(function(){
     $('#marques').DataTable();
     $('#products').DataTable();
     $('#banners').DataTable();
+    $('#coupons').DataTable();
+    $('#admins').DataTable();
+    $('#users').DataTable();
+    $('#commandes').DataTable();
+    $('#shippings').DataTable();
 
     $(".nav-item").removeClass("active");
     $(".nav-link").removeClass("active");
@@ -43,27 +48,30 @@ $(document).ready(function(){
         }
     });
     //update admin 
-    $(document).on("click",".updateAdminStatus",function(){
+    $(document).on("click", ".updateAdminStatus", function() {
         var status = $(this).children("i").attr("status");
-        var admin_id =$(this).attr("admin_id");
+        var admin_id = $(this).attr("admin_id");
+    
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            type:'post',
-            url:'/admin/update-admin-status',
-            data:{status:status,admin_id:admin_id},
-            success:function(resp){
-               if(resp['status']==0){
-                $("#admin-"+admin_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
-               } else if(resp['status']==1){
-                $("#admin-"+admin_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
-               }
-            },error:function(){
+            type: 'post',
+            url: '/admin/update-admin-status',
+            data: { status: status, admin_id: admin_id },
+            success: function(resp) {
+                if (resp['status'] == 0) {
+                    $("#admin-" + admin_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                } else if (resp['status'] == 1) {
+                    $("#admin-" + admin_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },
+            error: function() {
                 alert("Error");
             }
-        })
-    })
+        });
+    });
+    
 
     //update section
 
@@ -89,16 +97,6 @@ $(document).ready(function(){
         })
     })
 
-    //confirm
-    // $(".confirmDelete").click(function(){
-    //     var title = $(this).attr("title");
-    //     if(confirm("Êtes-vous sûr de supprimer cette "+title+"?")){
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // })
-    // $(".confirmDelete").click(function(){
     $(document).on("click",".confirmDelete",function(){
         var module = $(this).attr("module");
         var moduleid = $(this).attr("moduleid");
@@ -140,6 +138,53 @@ $(document).ready(function(){
                 $("#category-"+category_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
                } else if(resp['status']==1){
                 $("#category-"+category_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+               }
+            },error:function(){
+                alert("Error");
+            }
+        })
+    })
+
+    // user status 
+      //update categorie
+      $(document).on("click",".updateUserStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var user_id =$(this).attr("user_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'post',
+            url:'/admin/update-user-status',
+            data:{status:status,user_id:user_id},
+            success:function(resp){
+               if(resp['status']==0){
+                $("#user-"+user_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+               } else if(resp['status']==1){
+                $("#user-"+user_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+               }
+            },error:function(){
+                alert("Error");
+            }
+        })
+    })
+
+    // frais de livraison status 
+     $(document).on("click",".updateShippingStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var shipping_id =$(this).attr("shipping_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'post',
+            url:'admin/shipping-status',
+            data:{status:status,shipping_id:shipping_id},
+            success:function(resp){
+               if(resp['status']==0){
+                $("#shipping-"+shipping_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+               } else if(resp['status']==1){
+                $("#shipping-"+shipping_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
                }
             },error:function(){
                 alert("Error");
@@ -194,7 +239,7 @@ $(document).ready(function(){
 })
 
 
- //update product
+ //status product
  $(document).on("click",".updateProductStatus",function(){
     var status = $(this).children("i").attr("status");
     var product_id =$(this).attr("product_id");
@@ -210,6 +255,52 @@ $(document).ready(function(){
             $("#product-"+product_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
            } else if(resp['status']==1){
             $("#product-"+product_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+           }
+        },error:function(){
+            alert("Error");
+        }
+    })
+})
+
+    //status product
+//  $(document).on("click",".updateCouponStatus",function(){
+//     var status = $(this).children("i").attr("status");
+//     var coupon_id =$(this).attr("coupon_id");
+//     $.ajax({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         },
+//         type:'post',
+//         url:'/admin/update-coupon-status',
+//         data:{status:status,coupon_id:coupon_id},
+//         success:function(resp){
+//            if(resp['status']==0){
+//             $("#coupon-"+coupon_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+//            } else if(resp['status']==1){
+//             $("#coupon-"+coupon_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+//            }
+//         },error:function(){
+//             alert("Error");
+//         }
+//     })
+// })
+
+  //update marque
+  $(document).on("click",".updateCouponStatus",function(){
+    var status = $(this).children("i").attr("status");
+    var coupon_id =$(this).attr("coupon_id");
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type:'post',
+        url:'/admin/update-coupon-status',
+        data:{status:status,coupon_id:coupon_id},
+        success:function(resp){
+           if(resp['status']==0){
+            $("#coupon-"+coupon_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+           } else if(resp['status']==1){
+            $("#coupon-"+coupon_id).html("<i  style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
            }
         },error:function(){
             alert("Error");
@@ -306,6 +397,39 @@ $(document).ready(function(){
         $(this).parent('div').remove(); //Remove field html
         x--; //Decrease field counter
     });
-    
+
+    // coupon field for manual/automatic 
+
+    $("#ManualCoupon").click(function(){
+        $("#couponField").show();
+    })
+
+    $("#AutomaticCoupon").click(function(){
+        $("#couponField").hide();
+    })
+
+    $("#courier_name").hide();
+    $("#tracking_number").hide();
+    $("#order_status").on("change",function(){
+        if(this.value=="Expédié"){
+            $("#courier_name").show();
+            $("#tracking_number").show();
+        }else{
+            $("#courier_name").hide();
+            $("#tracking_number").hide();
+        }
+    });
+
+    // $("#item_courier_name").hide();
+    // $("#item_tracking_number").hide();
+    // $("#commande_item_status").on("change",function(){
+    //     if(this.value=="Expédié"){
+    //         $("#item_courier_name").show();
+    //         $("#item_tracking_number").show();
+    //     }else{
+    //         $("#item_courier_name").hide();
+    //         $("#item_tracking_number").hide();
+    //     }
+    // });
 
 });

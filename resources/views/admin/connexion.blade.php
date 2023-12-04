@@ -34,20 +34,35 @@
               <form class="pt-3" action="{{url('admin/connexion')}}" method="POST">
                 @csrf
                 @method ('POST')
+                @if (Session::has('success_message'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                 <strong>Success:</strong> {{ Session::get('success_message')}}
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
+                    <span aria-hidden="true">&times;</span>
+                 </button>
+              </div>
+              @endif
 
-                @error('email')
-                  <div class="text text-danger">
-                     {{ $message }}
-                   </div>
-                @enderror
+              @if (Session::has('error_message'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 <strong>Error:</strong> {{ Session::get('error_message')}}
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
+                    <span aria-hidden="true">&times;</span>
+                 </button>
+              </div>
+              @endif
+
+              @if ($errors->any())
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 <strong></strong> <?php echo implode('', $errors->all('<div>:message</div>')); ?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
+                    <span aria-hidden="true">&times;</span>
+                 </button>
+              </div>
+              @endif 
                 <div class="form-group">
                   <input type="email" name="email" id="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" >
                 </div>
-                @error('password')
-                    <div class="text text-danger">
-                         {{ $message }}
-                     </div>
-                  @enderror
                 <div class="form-group">
                   <input type="password" name="password" id="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" >
                 </div>

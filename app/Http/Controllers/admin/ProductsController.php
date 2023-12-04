@@ -27,18 +27,14 @@ class ProductsController extends Controller
                 return redirect("mdifier_fournisseur/profile")->with('error_message','Votre compte vendeur n"est pas approuver. Assurer vous que les information de votre boutique, et de votre bank sont bien corecte!');
               }
         }
-        $products = Product::with(['section'=>function($query){
-            $query->select('id','nom');
-        },'category'=>function($query){
-            $query->select('id','category_nom');
-        }]);
+        $products = Product::with(['section:id,nom', 'category:id,category_nom']);
 
         if($adminType=="vendeur"){
             $products = $products->where('vendeur_id',$vendeur_id);
         }
-        $products = $products->get()->toArray();
+        $products = $products->get();
       
-        // // $myArray = null;
+        $toArray = null;
         return view('admin.products.products')->with(compact('products'));
     }
 
@@ -115,9 +111,7 @@ class ProductsController extends Controller
                     Image::make($image_tmp)->resize(1000,1000)->save($largeImagePath); // Utilisez $image_tmp au lieu de $request
                     Image::make($image_tmp)->resize(500,500)->save($mediumImagePath); // Utilisez $image_tmp au lieu de $request
                     Image::make($image_tmp)->resize(250,250)->save($smallImagePath); 
-
                     $product->product_image = $imageName;
-
                 }
             } 
 
@@ -162,9 +156,6 @@ class ProductsController extends Controller
             $product->product_discount =$data['product_discount'];
             $product->product_weight =$data['product_weight'];
             $product->description =$data['description'];
-            $product->meta_title =$data['meta_title'];
-            $product->meta_description =$data['meta_description'];
-            $product->meta_keywords =$data['meta_keywords'];
             
             if(!empty($data['product_discount'])){
                 $data['product_discount'] = 0;

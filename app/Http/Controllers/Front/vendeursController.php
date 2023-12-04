@@ -71,61 +71,64 @@ class vendeursController extends Controller
             //  $admin->email  = $data['email'];
 
              $admin->save();
+                 // send confirmation email 
+
+                 $email = $data["email"];
+                 $messageData = [
+                    'email' => $data['email'],
+                    'nom' => $data['nom'],
+                    'code' => base64_encode($data['email'])
+                 ];
+    
+                 Mail::send('emails.vendeur_confirmation',$messageData , function($message)use($email){
+                    $message->to($email)->subject('confirmez votre compte vendeur');
+                 });
 
              DB::commit();
+        
 
-             // send confirmation email 
-
-             $email = $data["email"];
-             $messageData = [
-                'email' => $data['email'],
-                'nom' => $data['nom'],
-                'code' => base64_decode($data['email'])
-             ];
-
-             Mail::send('emails.vendeur_confirmation',$messageData , function($message)use($email){
-                $message->to($email)->subject('confirmez votre compte vendeur');
-             });
+         
              //redirecte back fournisseur avect un message de success
 
-             $message = "Merci de vous inscrire en tant que vendeur. Nous confirmerons par e-mail une fois votre compte approuvé.";
+             $message = "Merci de vous inscrire en tant que vendeur. Veuillez confirmer votre adresse e-mail pour activer votre compte.";
              return redirect()->back()->with('success_message',$message );
-
             }          
     }
 
     public function vendeurconfirm($email)
     {
         //  echo"<pre>"; print_r($data); die;
-        $vendeurCount = Vendeur::where('email',$email)->first();
-        if($vendeurCount>0){
-            $vendeurDetails = Vendeur::where('email',$email)->first();
-            if($vendeurDetails->confirm == "Yes"){
+        $email = base64_decode($email);
+        $vendeurCount = Vendeur::where('email', $email)->count();
+        if ($vendeurCount > 0) {
+            $vendeurDetails = Vendeur::where('email', $email)->first();
+            if ($vendeurDetails->confirm == "Yes") {
                 $message = "Votre compte vendeur est déjà confirmé. Vous pouvez vous connecter";
-                return redirect('vendeur/login-register')->with('error_message',$message);  
-            } else{
-                Admin::where('email',$email)->update(['confirm'=>'Yes']);
-                Vendeur::where('email',$email)->update(['confirm'=>'Yes']);
-
+                return redirect('vendeur/login-register')->with('error_message', $message);
+            } else {
+                Admin::where('email', $email)->update(['confirm' => 'Yes']);
+                Vendeur::where('email', $email)->update(['confirm' => 'Yes']);
+        
                 // send email
+                // $email = $data['email'];
                 $messageData = [
-                   'email' => $email,
-                   'nom' => $vendeurDetails->nom,
-                   'telephone' =>  $vendeurDetails->telephone
+                    'email' => $email,
+                    'nom' => $vendeurDetails->nom,
+                    'telephone' =>  $vendeurDetails->telephone
                 ];
-   
-                Mail::send('emails.vendeur_confirmer',$messageData , function($message)use($email){
-                   $message->to($email)->subject('Votre compte vendeur est confirmez ');
+        
+                Mail::send('emails.vendeur_confirmer', $messageData, function ($message) use ($email) {
+                    $message->to($email)->subject('Votre compte vendeur est confirmé');
                 });
-                // redirect vendeur a login et register 
-
-                $message = "Votre compte de vendeur est confirmé. Vous pouvez vous connecter et ajouter vos 
-                   détails professionnels personnels et bancaires pour activer votre compte vendeur pour ajouter des produits";
-                 return redirect('vendeur/login-register')->with('success_message',$message);  
+                // redirect vendeur a login et register
+        
+                $message = "Votre compte est confirmé. Connectez-vous et ajoutez vos informations professionnelles, personnelles et bancaires pour activer votre compte vendeur et commencer à ajouter des produits.";
+                return redirect('vendeur/login-register')->with('success_message', $message);
             }
-        } else{
+        } else {
             abort(404);
         }
+        
     }
 
 }

@@ -8,10 +8,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="{{url('/')}}">Home</a>
+                        <a href="{{url('/')}}">Accueil</a>
                     </li>
                     <li class="is-marked">
-                        <a href="listing.html">Shop</a>
+                        <a href="listing.html">Magasin</a>
                     </li>
                 </ul>
             </div>
@@ -25,7 +25,7 @@
             <div class="shop-intro">
                 <ul class="bread-crumb">
                     <li class="has-separator">
-                        <a href="{{url('/')}}">Home</a>
+                        <a href="{{url('/')}}">Accueil</a>
                     </li>
                      <?php echo $categoryDetails['breadcrumbs']; ?>
                 </ul>
@@ -86,11 +86,11 @@
                         </div> -->
                         <div class="toolbar-sorter-2">
                             <div class="select-box-wrapper">
-                                <label class="sr-only" for="show-records">Show Records Per Page</label>
+                                <label class="sr-only" for="show-records">Afficher les enregistrements par page</label>
                                 <select class="select-box" id="show-records">
-                                    <option selected="selected" value="">Show: {{
+                                    <option selected="selected" value="">Afficher: {{
                                        count($categoryProducts) }}</option>
-                                    <option value="">Show: All</option>
+                                    <option value="">Afficher: Tous</option>
                                 </select>
                             </div>
                         </div>

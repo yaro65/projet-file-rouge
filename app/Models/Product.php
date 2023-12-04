@@ -51,26 +51,27 @@ class Product extends Model
         return $discounted_price;
     }
 
-    public static function getDiscountAttributePrice($product_id,$size){
-        $proAttrPrice = ProductsAttribute::where(['product_id'=>$product_id,'size'=>$size])->first()->toArray();
-        $proDetails = Product::select('product_price','product_discount','category_id')->where('id',$product_id)->first();
-        $proDetails = json_decode(json_encode($proDetails),true);
-        $catDetails = category::select('category_remise')->where('id',$proDetails['category_id'])->first();
-        $catDetails = json_decode(json_encode($catDetails),true);
-
-        if($proDetails['product_discount']>0){
-            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price']*$proDetails['product_discount']/100);
+    public static function getDiscountAttributePrice($product_id, $size)
+    {
+        $proAttrPrice = ProductsAttribute::where(['product_id' => $product_id, 'size' => $size])->first()->toArray();
+        $proDetails = Product::select('product_price', 'product_discount', 'category_id')->where('id', $product_id)->first();
+        $proDetails = json_decode(json_encode($proDetails), true);
+        $catDetails = Category::select('category_remise')->where('id', $proDetails['category_id'])->first();
+        $catDetails = json_decode(json_encode($catDetails), true);
+    
+        if ($proDetails['product_discount'] > 0) {
+            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price'] * $proDetails['product_discount'] / 100);
             $discount = $proAttrPrice['price'] - $final_price;
-        }else if($catDetails['category_discount']>0){
-            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price']*$catDetails['category_discount']/100);
+        } else if ($catDetails['category_remise'] > 0) {
+            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price'] * $catDetails['category_remise'] / 100);
             $discount = $proAttrPrice['price'] - $final_price;
         } else {
             $final_price = $proAttrPrice['price'];
-            $discount =0;
+            $discount = 0;
         }
-        return array('product_price'=>$proAttrPrice['price'],'final_price'=>$final_price,'discount'=>$discount);
-
+        return array('product_price' => $proAttrPrice['price'], 'final_price' => $final_price, 'discount' => $discount);
     }
+    
 
     public static function isProductNew($product_id)
     {
@@ -82,5 +83,9 @@ class Product extends Model
         $isProductNew = "No";
        } 
        return $isProductNew ;
+    }
+    public static function getProductImage($product_id){
+        $getProductImage = Product::select('product_image')->where('id',$product_id)->first()->toArray();
+        return $getProductImage['product_image'];
     }
 }

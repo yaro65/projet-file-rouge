@@ -16,7 +16,8 @@ class CategoryController extends Controller
         Session::put('page','categories');
         $categories = Category::with(['section','parentcategory'])->get()->toArray();
         // dd($categories);
-        $myArray = null;
+        // $myArray = null;
+        $array = null;
         return view('admin.categories.categories')->with(compact('categories'));
     }
 
@@ -69,27 +70,12 @@ class CategoryController extends Controller
             $this->validate($request, $rules, $customMessage);
               
     
-            if ($request->hasFile('category_image')) {
-                $image_tmp = $request->file('category_image');
-                if ($image_tmp->isValid()) {
-                    $extension = $image_tmp->getClientOriginalExtension();
-                    $imageName = rand(111, 99999) . '.' . $extension;
-                    $imagePath = 'front/images/category_images/' . $imageName; // Corrigez le chemin de l'image
-                    Image::make($image_tmp)->save($imagePath);
-                    $category->category_image = $imageName;
-                }
-            } else {
-                $category->category_image = "";
-            }
             $category->section_id = $data['section_id'];
             $category->parent_id = $data['parent_id'];
             $category->category_nom = $data['category_nom'];
             $category->category_remise = $data['category_remise'];
             $category->description = $data['description'];
             $category->url = $data['url'];
-            $category->grand_titre = $data['grand_titre'];
-            $category->grand_description = $data['grand_description'];
-            $category->grand_mots_cle = $data['grand_mots_cle'];
             $category->status = 1;
             $category->save();
     

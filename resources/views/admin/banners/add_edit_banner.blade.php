@@ -6,7 +6,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h4 class="font-weight-bold">Banners</h4>
+                  <h4 class="font-weight-bold">Bannières</h4>
                   <!-- <h6 class="font-weight-normal mb-0">Modifier le mot de passe</h6> -->
                 </div>
                 <div class="col-12 col-xl-4">
@@ -37,7 +37,7 @@
                                 @foreach($errors->all() as $error)
                                    <li>{{ $error }}</li>
                                    @endforeach
-                                 <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                              </div>
@@ -62,7 +62,7 @@
                              </div>
 
                              <div class="form-group">
-                                <label for="admin_image">Banner image</label>
+                                <label for="admin_image">Bannières image</label>
                                 <input type="file" class="form-control" id="image" name="image" placeholder="Banner image">
                              </div>
                              @if(!empty($banner['image']))
@@ -71,24 +71,24 @@
                              @endif
 
                              <div class="form-group">
-                              <label for="link">Banner Link</label>
+                              <label for="link">Lien de la bannière</label>
                                 <input type="text" class="form-control" id="link" name="link" placeholder="Banner Link"
                                 @if(!empty($banner['link'])) value="{{$banner['link']}}" @else value="{{old('link')}}" @endif>
                              </div>
 
                              <div class="form-group">
-                              <label for="title">Banner Titre </label>
+                              <label for="title">Titre de la bannière </label>
                                 <input type="text" class="form-control" id="title" name="title" placeholder="Banner Titre"
                                 @if(!empty($banner['title'])) value="{{$banner['title']}}" @else value="{{old('title')}}" @endif>
                              </div>
 
                              <div class="form-group">
-                              <label for="alt">Banner alternate text</label>
+                              <label for="alt">Texte  de la bannière</label>
                                 <input type="text" class="form-control" id="alt" name="alt" placeholder="Banner alternate text"
                                 @if(!empty($banner['alt'])) value="{{$banner['alt']}}" @else value="{{old('alt')}}" @endif>
                              </div>
 
-                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                           <button type="submit" class="btn btn-primary mr-2">Envoyer</button>
                            <button type="reset" class="btn btn-light">Cancel</button>
                         </form>
                 </div>

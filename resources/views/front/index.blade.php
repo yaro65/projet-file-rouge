@@ -39,20 +39,16 @@
     <div class="section-maker">
         <div class="container">
             <div class="sec-maker-header text-center">
-                <h3 class="sec-maker-h3">TOP COLLECTION</h3>
+                <h3 class="sec-maker-h3">Top Collection</h3>
                 <ul class="nav tab-nav-style-1-a justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#men-latest-products">New Arrivals</a>
+                        <a class="nav-link active" data-toggle="tab" href="#men-latest-products">Nouveautés</a>
                     </li>
+                   
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#men-best-selling-products">Best Sellers</a>
+                        <a class="nav-link" data-toggle="tab" href="#discounted-products">Produits en Promotion</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#discounted-products">Discounted Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#men-featured-products">Featured Products</a>
-                    </li>
+                   
                 </ul>
             </div>
             <div class="wrapper-content">
@@ -116,7 +112,7 @@
                                             @endif
                                         </div>
                                         <div class="tag new">
-                                            <span>NEW</span>
+                                            <span>Nouveau</span>
                                         </div>
                                     </div>
                                     @endforeach
@@ -348,9 +344,9 @@
                                 <i class="ion ion-md-star"></i>
                             </div>
                             <h2>
-                                Great Value
+                            Excellent Rapport
                             </h2>
-                            <p>We offer competitive prices on our 100 million plus product range</p>
+                            <p>Nous proposons des prix compétitifs sur notre gamme de plus de 100 millions de produits.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
@@ -359,9 +355,9 @@
                                 <i class="ion ion-md-cash"></i>
                             </div>
                             <h2>
-                                Shop with Confidence
+                            Achetez en toute confiance.
                             </h2>
-                            <p>Our Protection covers your purchase from click to delivery</p>
+                            <p>Notre protection couvre votre achat de la commande à la livraison.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
@@ -370,9 +366,9 @@
                                 <i class="ion ion-ios-card"></i>
                             </div>
                             <h2>
-                                Safe Payment
+                                Paiement sécurisé.
                             </h2>
-                            <p>Pay with the world’s most popular and secure payment methods</p>
+                            <p>Payez avec les méthodes de paiement les plus populaires et sécurisées au monde.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
@@ -381,9 +377,9 @@
                                 <i class="ion ion-md-contacts"></i>
                             </div>
                             <h2>
-                                24/7 Help Center
+                            Centre d'aide disponible 24h/24, 7j/7.
                             </h2>
-                            <p>Round-the-clock assistance for a smooth shopping experience</p>
+                            <p>Assistance 24h/24 pour une expérience d'achat fluide.</p>
                         </div>
                     </div>
                 </div>

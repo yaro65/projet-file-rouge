@@ -1,36 +1,19 @@
     <!-- Footer -->
+    <p><p></p></p>
     <footer class="footer">
         <div class="container">
-            <!-- Outer-Footer -->
-            <div class="outer-footer-wrapper u-s-p-y-80">
-                <h6>
-                    For special offers and other discount information
-                </h6>
-                <h1>
-                    Subscribe to our Newsletter
-                </h1>
-                <p>
-                    Subscribe to the mailing list to receive updates on promotions, new arrivals, discount and coupons.
-                </p>
-                <form class="newsletter-form">
-                    <label class="sr-only" for="newsletter-field">Enter your Email</label>
-                    <input type="text" id="newsletter-field" placeholder="Your Email Address">
-                    <button type="submit" class="button">SUBMIT</button>
-                </form>
-            </div>
-            <!-- Outer-Footer /- -->
             <!-- Mid-Footer -->
             <div class="mid-footer-wrapper u-s-p-b-80">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="footer-list">
-                            <h6>COMPANY</h6>
+                            <h6> ENTREPRISE</h6>
                             <ul>
                                 <li>
-                                    <a href="about.html">About Us</a>
+                                    <a href="about.html">À Propos de Nous</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html">Contact Us</a>
+                                    <a href="contact.html">Contactez-nous</a>
                                 </li>
                                 <li>
                                     <a href="faq.html">FAQ</a>
@@ -43,29 +26,29 @@
                             <h6>COLLECTION</h6>
                             <ul>
                                 <li>
-                                    <a href="cart.html">Men Clothing</a>
+                                    <a href="cart.html"></a>
                                 </li>
                                 <li>
-                                    <a href="checkout.html">Women Clothing</a>
+                                    <a href="checkout.html"></a>
                                 </li>
                                 <li>
-                                    <a href="account.html">Kids Clothing</a>
+                                    <a href="account.html"></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="footer-list">
-                            <h6>ACCOUNT</h6>
+                            <h6>COMPTE</h6>
                             <ul>
                                 <li>
-                                    <a href="shop-v1-root-category.html">My Account</a>
+                                    <a href="shop-v1-root-category.html">Mon Compte</a>
                                 </li>
                                 <li>
-                                    <a href="shop-v1-root-category.html">My Profile</a>
+                                    <a href="shop-v1-root-category.html">Mon Profil</a>
                                 </li>
                                 <li>
-                                    <a href="listing.html">My Orders</a>
+                                    <a href="listing.html">Mes Commandes</a>
                                 </li>
                             </ul>
                         </div>
@@ -76,19 +59,19 @@
                             <ul>
                                 <li>
                                     <i class="fas fa-location-arrow u-s-m-r-9"></i>
-                                    <span>Stack Developers Youtube Channel</span>
+                                    <span></span>
                                 </li>
                                 <li>
                                     <a href="tel:+111-222-333">
                                         <i class="fas fa-phone u-s-m-r-9"></i>
-                                        <span>+111-222-333</span>
+                                        <span>+226 57-53-14-41</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:info@sitemakers.in">
+                                    <a href="mailto:kanmagide@gmail.com">
                                         <i class="fas fa-envelope u-s-m-r-9"></i>
                                         <span>
-                                            info@sitemakers.in</span>
+                                            kanmagide@gmail.com</span>
                                     </a>
                                 </li>
                             </ul>
@@ -139,7 +122,7 @@
                     </ul>
                 </div>
                 <p class="copyright-text">Copyright &copy; 2022
-                    <a target="_blank" rel="nofollow" href="https://youtube.com/stackdevelopers">Stack Developers</a> | All Right Reserved</p>
+                    <a target="_blank" rel="nofollow" href="https://youtube.com/stackdevelopers">FasoCom</a> | Tous les droits sont réservés</p>
             </div>
         </div>
         <!-- Bottom-Footer /- -->

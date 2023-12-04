@@ -2,22 +2,23 @@
 use App\Models\Section;
 $sections = Section::sections();
             //  echo "<pre>"; print_r($sections); die;
+$totalPanierItems = totalPanierItems();
 ?>
 <header>
         <!-- Top-Header -->
-       <div class="full-layer-outer-header">
+       <div class="full-layer-outer-header ">
             <div class="container clearfix">
                 <nav>
                     <ul class="primary-nav g-nav">
                         <li>
                             <a href="tel:+111222333">
                                 <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
-                                Telephone:+111-222-333</a>
+                                Telephone:+226 57-53-14-41</a>
                         </li>
                         <li>
                             <a href="mailto:info@sitemakers.in">
                                 <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
-                                E-mail: info@sitemakers.in
+                                E-mail: yaronazirou16@gmail.com
                             </a>
                         </li>
                     </ul>
@@ -25,88 +26,88 @@ $sections = Section::sections();
                 <nav>
                     <ul class="secondary-nav g-nav">
                         <li>
-                            <a>My Account
+                            <a>@if(Auth::check()) Mon compte @else Connexion/Inscription @endif
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
                             <ul class="g-dropdown" style="width:200px">
                                 <li>
-                                    <a href="cart.html">
+                                    <a href="{{url('/panier')}}">
                                         <i class="fas fa-cog u-s-m-r-9"></i>
-                                        My Cart</a>
-                                </li>
-                                <li>
-                                    <a href="wishlist.html">
-                                        <i class="far fa-heart u-s-m-r-9"></i>
-                                        My Wishlist</a>
+                                        Mon Panier</a>
                                 </li>
                                 <li>
                                     <a href="checkout.html">
                                         <i class="far fa-check-circle u-s-m-r-9"></i>
-                                        Checkout</a>
+                                        Vérifier</a>
+                                </li>
+                                @if(Auth::check())
+                                <li>
+                                    <a href="{{url('user/account')}}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Mon Compte</a>
                                 </li>
                                 <li>
-                                    <a href="account.html">
+                                    <a href="{{url('user/commandes')}}">
                                         <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        Customer Login</a>
+                                        Mes Commandes</a>
                                 </li>
                                 <li>
-                                    <a href="account.html">
+                                    <a href="{{url('/user/deconnexion')}}">
                                         <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        Vendor Login</a>
+                                        Deconnexion</a>
                                 </li>
+                                @else
+                                <li>
+                                    <a href="{{url('/user/login-register')}}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Connexion Client</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/vendeur/login-register')}}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                         Connexion Vendeur </a>
+                                </li>
+                                @endif
+
                             </ul>
                         </li>
                         <li>
-                            <a>USD
+                            <a>Fr. Cfa
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
-                            <ul class="g-dropdown" style="width:90px">
-                                <li>
-                                    <a href="#" class="u-c-brand">($) USD</a>
-                                </li>
-                                <li>
-                                    <a href="#">(£) GBP</a>
-                                </li>
-                            </ul>
+                           
                         </li>
                         <li>
-                            <a>ENG
+                            <a>Fr
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
-                            <ul class="g-dropdown" style="width:70px">
-                                <li>
-                                    <a href="#" class="u-c-brand">ENG</a>
-                                </li>
-                                <li>
-                                    <a href="#">ARB</a>
-                                </li>
-                            </ul>
+                            
                     </ul>
                 </nav>
             </div>
        </div>
         <!-- Top-Header /- -->
         <!-- Mid-Header -->
-          <div class="full-layer-mid-header">
+          <div class="mb-5">
             <div class="container">
                 <div class="row clearfix align-items-center">
                     <div class="col-lg-3 col-md-9 col-sm-6">
                         <div class="brand-logo text-lg-center">
                             <a href="index.html">
-                                <img src="{{ asset('front/images/main-logo/stack-developers-logo.png')}}" alt="Stack Developers" class="app-brand-logo">
+                            <img src="{{ asset('front/images/main-logo/Logo.png')}}" alt="Stack Developers" class="app-brand-logo" width="280" height="170">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6 u-d-none-lg">
                         <form class="form-searchbox">
-                            <label class="sr-only" for="search-landscape">Search</label>
-                            <input id="search-landscape" type="text" class="text-field" placeholder="Search everything">
+                            <label class="sr-only" for="search-landscape">Rechercher</label>
+                            <input id="search-landscape" type="text" class="text-field" placeholder="Rechercher">
                             <div class="select-box-position">
                                 <div class="select-box-wrapper select-hide">
-                                    <label class="sr-only" for="select-category">Choose category for search</label>
+                                    <label class="sr-only" for="select-category">Choisissez une catégorie pour la recherche</label>
                                     <select class="select-box" id="select-category">
                                         <option selected="selected" value="">
-                                            All
+                                            Tous
                                         </option>
                                         @foreach($sections as $section)
                                         <option value="">{{ $section['nom'] }}</option>
@@ -134,8 +135,8 @@ $sections = Section::sections();
                                 <li>
                                     <a id="mini-cart-trigger">
                                         <i class="ion ion-md-basket"></i>
-                                        <span class="item-counter">4</span>
-                                        <span class="item-price">$220.00</span>
+                                        <span class="item-counter totalPanierItems">{{$totalPanierItems}}</span>
+                                        <span class="item-price"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -159,56 +160,9 @@ $sections = Section::sections();
          </div>
         <!-- Responsive-Buttons /- -->
         <!-- Mini Cart -->
-       <div class="mini-cart-wrapper">
-            <div class="mini-cart">
-                <div class="mini-cart-header">
-                    YOUR CART
-                    <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
-                </div>
-                <ul class="mini-cart-list">
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="mini-shop-total clearfix">
-                    <span class="mini-total-heading float-left">Total:</span>
-                    <span class="mini-total-price float-right">$400.00</span>
-                </div>
-                <div class="mini-action-anchors">
-                    <a href="cart.html" class="cart-anchor">View Cart</a>
-                    <a href="checkout.html" class="checkout-anchor">Checkout</a>
-                </div>
-            </div>
-       </div>
+        <div id="appendHeaderPanierItems">
+        @include('front.layout.header_panier_items')
+        </div>
         <!-- Mini Cart /- -->
         <!-- Bottom-Header -->
          <div class="full-layer-bottom-header">
@@ -218,7 +172,7 @@ $sections = Section::sections();
                         <div class="v-menu v-close">
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
-                                All Categories
+                                Categories
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>
@@ -271,36 +225,36 @@ $sections = Section::sections();
                     <div class="col-lg-9">
                         <ul class="bottom-nav g-nav u-d-none-lg">
                             <li>
-                                <a href="listing-without-filters.html">New Arrivals
-                                    <span class="superscript-label-new">NEW</span>
+                                <a href="listing-without-filters.html">Arrivages récents
+                                    <span class="superscript-label-new">Nouveautés</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Best Seller
-                                    <span class="superscript-label-hot">HOT</span>
+                                <a href="listing-without-filters.html">Meilleure vente
+                                    <span class="superscript-label-hot">Top 10</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Featured
+                                <a href="listing-without-filters.html">En vedette
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Discounted
+                                <a href="listing-without-filters.html">En promotion
                                     <span class="superscript-label-discount">-30%</span>
                                 </a>
                             </li>
                             <li class="mega-position">
-                                <a>More
+                                <a>Plus
                                     <i class="fas fa-chevron-down u-s-m-l-9"></i>
                                 </a>
                                 <div class="mega-menu mega-3-colm">
                                     <ul>
-                                        <li class="menu-title">COMPANY</li>
+                                        <li class="menu-title">TPLATFORME</li>
                                         <li>
-                                            <a href="about.html" class="u-c-brand">About Us</a>
+                                            <a href="about.html" class="u-c-brand">À Propos de Nous</a>
                                         </li>
                                         <li>
-                                            <a href="contact.html">Contact Us</a>
+                                            <a href="contact.html">Contactez-nous</a>
                                         </li>
                                         <li>
                                             <a href="faq.html">FAQ</a>
@@ -309,25 +263,25 @@ $sections = Section::sections();
                                     <ul>
                                         <li class="menu-title">COLLECTION</li>
                                         <li>
-                                            <a href="cart.html">Men Clothing</a>
+                                            <a href="cart.html">Matières premières </a>
                                         </li>
                                         <li>
-                                            <a href="checkout.html">Women Clothing</a>
+                                            <a href="checkout.html">Agricoles </a>
                                         </li>
                                         <li>
-                                            <a href="account.html">Kids Clothing</a>
+                                            <a href="account.html">Artisanaux</a>
                                         </li>
                                     </ul>
                                     <ul>
-                                        <li class="menu-title">ACCOUNT</li>
+                                        <li class="menu-title">COMPTE</li>
                                         <li>
                                             <a href="shop-v1-root-category.html">My Account</a>
                                         </li>
                                         <li>
-                                            <a href="shop-v1-root-category.html">My Profile</a>
+                                            <a href="shop-v1-root-category.html">Mon Compte</a>
                                         </li>
                                         <li>
-                                            <a href="listing.html">My Orders</a>
+                                            <a href="listing.html">Mes Commandes</a>
                                         </li>
                                         
                                     </ul>

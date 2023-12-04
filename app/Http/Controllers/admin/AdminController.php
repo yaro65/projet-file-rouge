@@ -164,99 +164,106 @@ class AdminController extends Controller
                 // Logique de traitement pour le scénario "profile" lorsqu'une requête POST est soumise
             }
             // Logique générale pour le scénario "profile"
-            $fournisseureDetail = Vendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->first()->toArray();
+            $vendeurDetails = Vendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->first()->toArray();
             
        
         }else if($slug=="boutique"){
-            Session::put('page','mdifier_fournisseur_boutique');
+            Session::put('page', 'modifier_fournisseur_boutique');
+
             // Logique pour le scénario "Boutique"
-            if ($request->isMethod('post','get')) {
+            if ($request->isMethod('post')) {
                 $data = $request->all();
                 if ($request->hasFile('photos_de_boutique')) {
                     $image_tmp = $request->file('photos_de_boutique');
                     if ($image_tmp->isValid()) {
-                        $extension = $image_tmp->getClientOriginalExtension(); // Utilisez $image_tmp au lieu de $request->file('image')
-                        $imageName = rand(111, 99999).'.'.$extension;
-                        $imagePath = 'admin/images/preuve/'.$imageName; // Utilisez $image_tmp au lieu de $request->file('image')
-                        Image::make($image_tmp)->save($imagePath); // Utilisez $image_tmp au lieu de $request
+                        $extension = $image_tmp->getClientOriginalExtension();
+                        $imageName = rand(111, 99999) . '.' . $extension;
+                        $imagePath = 'admin/images/preuve/' . $imageName;
+                        Image::make($image_tmp)->save($imagePath);
                     }
                 } else if (!empty($data['current_photos_de_boutique'])) {
                     $imageName = $data['current_photos_de_boutique'];
                 }
-                $vendeurCount =  BoutiqueVendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->count();
-                if($vendeurCount>0){
-                // detail de la boutique 
-                BoutiqueVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->update([
-                    'nom_de_boutique' => $data['nom_de_boutique'],
-                    'adresse_de_boutique' => $data['adresse_de_boutique'],
-                    'ville_de_boutique' => $data['ville_de_boutique'],
-                    'secteur_de_boutique' => $data['secteur_de_boutique'],
-                    'tell_de_boutique' => $data['tell_de_boutique'],
-                    'email_de_boutique' => $data['email_de_boutique'],
-                    'document_de_boutique' => $data['document_de_boutique'],
-                    'photos_de_boutique' => $imageName
-                ]);
+            
+                $vendeurCount = BoutiqueVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->count();
+                if ($vendeurCount > 0) {
+                    // Détails de la boutique
+                    BoutiqueVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->update([
+                        'nom_de_boutique' => $data['nom_de_boutique'],
+                        'adresse_de_boutique' => $data['adresse_de_boutique'],
+                        'ville_de_boutique' => $data['ville_de_boutique'],
+                        'secteur_de_boutique' => $data['secteur_de_boutique'],
+                        'tell_de_boutique' => $data['tell_de_boutique'],
+                        'email_de_boutique' => $data['email_de_boutique'],
+                        'document_de_boutique' => $data['document_de_boutique'],
+                        'photos_de_boutique' => $imageName
+                    ]);
                 } else {
-                // detail de la boutique 
-                BoutiqueVendeur::insert(['vendeur_id'=>Auth::guard('admin')->user()->
-                    vendeur_id,
-                    'nom_de_boutique' => $data['nom_de_boutique'],
-                    'adresse_de_boutique' => $data['adresse_de_boutique'],
-                    'ville_de_boutique' => $data['ville_de_boutique'],
-                    'secteur_de_boutique' => $data['secteur_de_boutique'],
-                    'tell_de_boutique' => $data['tell_de_boutique'],
-                    'email_de_boutique' => $data['email_de_boutique'],
-                    'document_de_boutique' => $data['document_de_boutique'],
-                    'photos_de_boutique' => $imageName
-                ]);
+                    // Détails de la boutique 
+                    BoutiqueVendeur::insert([
+                        'vendeur_id' => Auth::guard('admin')->user()->vendeur_id,
+                        'nom_de_boutique' => $data['nom_de_boutique'],
+                        'adresse_de_boutique' => $data['adresse_de_boutique'],
+                        'ville_de_boutique' => $data['ville_de_boutique'],
+                        'secteur_de_boutique' => $data['secteur_de_boutique'],
+                        'tell_de_boutique' => $data['tell_de_boutique'],
+                        'email_de_boutique' => $data['email_de_boutique'],
+                        'document_de_boutique' => $data['document_de_boutique'],
+                        'photos_de_boutique' => $imageName
+                    ]);
                 }
-
-                return redirect()->back()->with('success', 'boutique modifié avec succès');
-                // Logique de traitement pour le scénario "profile" lorsqu'une requête POST est soumise
+            
+                return redirect()->back()->with('success', 'Boutique modifiée avec succès');
             }
-            $vendeurCount = BoutiqueVendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->count();
-            if($vendeurCount>0){
-                $fournisseureDetail = BoutiqueVendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->first()->toArray(); 
+            
+            // Logique de traitement pour le scénario "profile" lorsqu'une requête GET est soumise
+            $vendeurCount = BoutiqueVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->count();
+            if ($vendeurCount > 0) {
+                $vendeurDetails = BoutiqueVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->first()->toArray();
             } else {
-                $fournisseureDetail = array();
+                $vendeurDetails = array();
             }
+            
         }else if($slug=="Bank"){
-            Session::put('page','mdifier_fournisseur_Bank');
+            Session::put('page', 'modifier_fournisseur_Bank');
+
             // Logique pour le scénario "Bank"
-            if ($request->isMethod('post','get')) {
-                $data = $request->all(); 
-                
-                $vendeurCount =  BankVendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->count();
-                if($vendeurCount>0){
-                BankVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->update([
+            if ($request->isMethod('post')) {
+                $data = $request->all();
+            
+                $vendeurCount = BankVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->count();
+                if ($vendeurCount > 0) {
+                    BankVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->update([
                         'nom_du_titulaire_du_compte' => $data['nom_du_titulaire_du_compte'],
                         'nom_de_la_bank' => $data['nom_de_la_bank'],
                         'numero_de_compte' => $data['numero_de_compte'],
                         'bank_ifsc_code' => $data['bank_ifsc_code'],
                     ]);
                 } else {
-                    BankVendeur::insert(['vendeur_id'=>Auth::guard('admin')->user()->
-                        vendeur_id,
+                    BankVendeur::insert([
+                        'vendeur_id' => Auth::guard('admin')->user()->vendeur_id,
                         'nom_du_titulaire_du_compte' => $data['nom_du_titulaire_du_compte'],
                         'nom_de_la_bank' => $data['nom_de_la_bank'],
                         'numero_de_compte' => $data['numero_de_compte'],
                         'bank_ifsc_code' => $data['bank_ifsc_code'],
                     ]);
                 }
-
-                return redirect()->back()->with('success', 'fournisseur modifié avec succès');
+            
+                return redirect()->back()->with('success', 'Fournisseur modifié avec succès');
                 // Logique de traitement pour le scénario "profile" lorsqu'une requête POST est soumise
-
-            }       
-            $vendeurCount = BankVendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->count();
-            if($vendeurCount>0){
-                $fournisseureDetail = BankVendeur::where('id', Auth::guard('admin')->user()->vendeur_id)->first()->toArray(); 
-            } else {
-                $fournisseureDetail = array();
+            
             }
+            
+            $vendeurCount = BankVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->count();
+            if ($vendeurCount > 0) {
+                $vendeurDetails = BankVendeur::where('vendeur_id', Auth::guard('admin')->user()->vendeur_id)->first()->toArray();
+            } else {
+                $vendeurDetails = [];
+            }
+            
         }
         // $countries = Country::where('status',1)->get();
-        return view('admin.paramettre.mdifier_fournisseur')->with(compact('slug', 'fournisseureDetail'));
+        return view('admin.paramettre.mdifier_fournisseur')->with(compact('slug', 'vendeurDetails'));
     }
 
     public function connexion(Request $request)
@@ -283,12 +290,7 @@ class AdminController extends Controller
             $this->validate($request, $rules, $customMessages);
 
             // Attempt to log in the admin user
-            if (
-                Auth::guard('admin')->attempt([
-                    'email' => $data['email'],
-                    'password' => $data['password'],
-                ])
-            ) {
+            if (Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password']])){
                 if(Auth::guard('admin')->user()->type=="vendeur" && Auth::guard('admin')->user()->confirm=="No"){
                     return redirect()->back()->with('error_message', 'Veuillez confirmer votre Email pour activer votre compte vendeur');
                 } else if(Auth::guard('admin')->user()->type!="vendeur" && Auth::guard('admin')->user()->status=="0"){
@@ -296,11 +298,9 @@ class AdminController extends Controller
                 } else {
                     return redirect('admin/dashboard');
                 }
-                
             } else {
                 return redirect()->back()->with('error_message', 'adress email ou mot de passe incorect');
             }
-            ;
         }
         return view('admin.connexion');
     }
@@ -323,7 +323,7 @@ class AdminController extends Controller
 
     public function viewmdifierfournisseur($id)
     {
-        $fournisseureDetail = Admin::with('fournisseureProfile','fournisseureBoutique','fournisseureBank')->where('id' , $id)->first();
+        $fournisseureDetail = Admin::with('vendeurProfile','vendeurBoutique','vendeurBank')->where('id' , $id)->first();
         $fournisseureDetail = json_decode(json_encode($fournisseureDetail), true);
         // dd($fournisseureDetail);
         return view('admin.admins.view-mdifier-fournisseur')->with(compact('fournisseureDetail'));
@@ -331,31 +331,36 @@ class AdminController extends Controller
 
     public function updateAdminStatus(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $data = $request->all();
-        }if($data['status']=="Active"){
-            $status = 0;
-        }else{
-            $status = 1;
+            if ($data['status'] == "Active") {
+                $status = 0;
+            } else {
+                $status = 1;
+            }
+        
+            Admin::where('id', $data['admin_id'])->update(['status' => $status]);
+            $adminDetails = Admin::where('id', $data['admin_id'])->first()->toArray();
+        
+            if ($adminDetails['type'] == "vendeur" && $status == 1) {
+                // Vendeur::where('id',$adminDetails['vendeur_id'])->update(['status'=>$status]);
+                // Envoi d'un e-mail de confirmation
+                $email = $adminDetails["email"];
+                $messageData = [
+                    'email' => $adminDetails['email'],
+                    'nom' => $adminDetails['nom'],
+                    'telephone' => $adminDetails['telephone']
+                ];
+        
+                Mail::send('emails.vendeur_aprouver', $messageData, function ($message) use ($email) {
+                    $message->to($email)->subject('Compte vendeur approuvé');
+                });
+            }
+        
+            $adminType = Auth::guard('admin')->user()->type;
+            return response()->json(['status' => $status, 'admin_id' => $data['admin_id']]);
         }
-        Admin::where('id',$data['admin_id'])->update(['status'=>$status]);
-        $adminDetails = Admin::where('id',$data['admin_id'])->first()->toArray;
-        if($adminDetails['type']=="vendeur" && $status==1){
-             // send confirmation email 
-
-             $email = $adminDetails["email"];
-             $messageData = [
-                'email' => $adminDetails['email'],
-                'nom' => $adminDetails['nom'],
-                'telephone' => $adminDetails['telephone']
-             ];
-
-             Mail::send('emails.vendeur_aprouver',$messageData , function($message)use($email){
-                $message->to($email)->subject('Compte vendeur Approver');
-             });
-        }
-        $adminType = Auth::guard('admin')->user()->type;
-        return response()->json(['status'=>$status,'admin_id'=>$data['admin_id']]);
+        
     }
     
     public function deconnexion()

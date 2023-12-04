@@ -37,7 +37,7 @@
                                 @foreach($errors->all() as $error)
                                    <li>{{ $error }}</li>
                                    @endforeach
-                                 <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                              </div>
@@ -73,17 +73,7 @@
                                  @include('admin.categories.append_categories_level')
                              </div>
 
-                             <div class="form-group">
-                                <label for="admin_image">Catégorie image</label>
-                                <input type="file" class="form-control" id="category_image" name="category_image" placeholder="">
-                             </div>
-                             @if(!empty($category['category_image']))
-                             <a target="blank" href="{{ url('front/images/category_images/'.$category['category_image'])}}">Voir photo</a>&nbsp;|&nbsp;
-
-                             <a class="confirmDelete" href="javascript:void(0)" module="category-image" moduleid="{{ $category['id'] }}">
-                                  Supprimer l'image
-                              </a>
-                             @endif
+                             
 
                              <div class="form-group">
                                  <label for="category_remise">Catégorie remise</label>
@@ -103,23 +93,7 @@
                              </div>
 
 
-                             <div class="form-group">
-                              <label for="grand_titre">Grand titre</label>
-                                <input type="text" class="form-control" id="grand_titre" name="grand_titre" placeholder="Entrer le Grand titre"
-                                @if(!empty($category['grand_titre'])) value="{{$category['grand_titre']}}" @else value="{{old('grand_titre')}}" @endif>
-                             </div>
-
-                             <div class="form-group">
-                              <label for="grand_description">Grand description</label>
-                                <input type="text" class="form-control" id="grand_description" name="grand_description" placeholder="Entrer le Grand description"
-                                @if(!empty($category['grand_description'])) value="{{$category['grand_titre']}}" @else value="{{old('grand_description')}}" @endif>
-                             </div>
-
-                             <div class="form-group">
-                              <label for="grand_mots_cle">Mots clé</label>
-                                <input type="text" class="form-control" id="grand_mots_cle" name="grand_mots_cle" placeholder="Entrer le Mots clé"
-                                @if(!empty($category['grand_mots_cle'])) value="{{$category['grand_mots_cle']}}" @else value="{{old('grand_mots_cle')}}" @endif>
-                             </div>
+              
 
                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
                            <button type="reset" class="btn btn-light">Cancel</button>

@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en-US">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{csrf_token()}}"/>
     <meta name="description" content="">
@@ -33,10 +30,16 @@
     <link rel="stylesheet" href="{{ url('front/css/utility.css') }}">
     <!-- Main -->
     <link rel="stylesheet" href="{{ url('front/css/bundle.css') }}">
+    <!-- Custom -->
+    <link rel="stylesheet" href="{{ url('front/css/custom.css') }}">
 </head>
 
 <body>
+<div class="loader">
+    <img src="{{ asset('front/images/loaders/loader.gif') }}" alt="loading...">
+</div>
 
+ 
 <!-- app -->
 <div id="app">
     @include('front.layout.header') 
@@ -79,21 +82,25 @@
     </style>
 </noscript>
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
 <script>
-window.ga = function() {
-    ga.q.push(arguments)
-};
-ga.q = [];
-ga.l = +new Date;
-ga('create', 'UA-XXXXX-Y', 'auto');
-ga('send', 'pageview')
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'GA_TRACKING_ID');
 </script>
-<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+<!-- <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
+<script type="text/javascript" src="{{ url('front/js/analytics.js') }}"></script>
+
 <!-- Modernizr-JS -->
 <script type="text/javascript" src="{{ url('front/js/vendor/modernizr-custom.min.js') }}"></script>
 <!-- NProgress -->
 <script type="text/javascript" src="{{ url('front/js/nprogress.min.js') }}"></script>
 <!-- jQuery -->
+<!-- <script type="text/javascript" src="{{ url('front/js/jquery-3.7.1.min.js') }}"></script> -->
 <script type="text/javascript" src="{{ url('front/js/jquery.min.js') }}"></script>
 <!-- Bootstrap JS -->
 <script type="text/javascript" src="{{ url('front/js/bootstrap.min.js') }}"></script>

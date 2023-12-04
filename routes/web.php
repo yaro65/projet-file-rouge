@@ -7,10 +7,17 @@ use App\Http\Controllers\admin\SectionController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\MarqueController;
 use App\Http\Controllers\admin\ProductsController;
+use App\Http\Controllers\admin\CouponsController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\admin\BannersController;
 use App\Http\Controllers\Front\vendeursController;
+use App\Http\Controllers\Front\UserController;
+use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\admin\ShippingController;
+use App\Http\Controllers\Front\AddressController;
+use App\Http\Controllers\Front\CommandesController;
+use App\Http\Controllers\admin\CommandeController;
 use App\Models\Category;
 
 /*
@@ -104,9 +111,32 @@ require __DIR__.'/auth.php';
         Route::post('admin/update-banner-status', [BannersController::class , 'updateBannerStatus']);
         Route::get('admin/delete-banner/{id}', [BannersController::class , 'deletebanner']);
         Route::match(['get', 'post'], 'admin/add-edit-banner/{id?}', [BannersController::class, 'addEditbanner']);
-         
+         //coupon 
+        Route::get('admin/coupons', [CouponsController::class , 'Coupons']);
+        Route::post('/admin/update-coupon-status', [CouponsController::class , 'updateCouponStatus']);
+        Route::get('admin/delete-coupon/{id}', [CouponsController::class , 'deletecoupon']);
+        Route::match(['get', 'post'], 'admin/add-edit-coupon/{id?}', [CouponsController::class, 'addEditCoupon']);
+        //user 
+        Route::get('admin/users', [UsersController::class , 'Users']);
+        Route::post('/admin/update-user-status', [UsersController::class , 'updateUserStatus']);
+        // commande 
+        Route::get('admin/commandes', [CommandeController::class , 'Commandes']);
+        Route::get('admin/commandes/{id?}', [CommandeController::class, 'DetailsCommandes']);
+        //mettre a jour le status de la commande 
+        Route::post('admin/update-commande-status', [CommandeController::class , 'updateCommandeStatus']);
+        Route::post('admin/update-commande-item-status', [CommandeController::class , 'updateCommandeItemStatus']);
+        //pdf
+        Route::get('admin/view/commande/invoice/{id?}', [CommandeController::class, 'Viewcommandepdf']);
+        Route::get('admin/commande/pdf/{id?}', [CommandeController::class, 'commandepdf']); 
+        // frais de livraison /admin/update-shipping-status
+        Route::get('shipping-charges', [ShippingController::class, 'Shipping']);
+        Route::post('admin/shipping-status', [ShippingController::class , 'ShippingStatus']);
+        Route::match(['get', 'post'], 'admin/add-edit-shipping/{id?}', [ShippingController::class, 'addEditShipping']);
+
+
     });
 // });
+   Route::get('admin/commande/telechargerpdf/{id?}', [App\Http\Controllers\admin\CommandeController::class, 'commandepdf']);
 
 Route::namespace('App\Http\Controllers\Fronts')->group(function(){
     Route::match(['get', 'post'],'/', [IndexController::class, 'index']);
@@ -125,7 +155,59 @@ Route::namespace('App\Http\Controllers\Fronts')->group(function(){
     //vendeur login register
     Route::get('/vendeur/login-register', [vendeursController::class, 'loginRegister']);
     Route::post('/vendeur/register', [vendeursController::class, 'vendeurRegister']);
-    Route::get('/vendeur/confirm{code}', [vendeursController::class, 'vendeurconfirm']);
+    Route::get('/vendeur/confirm/{code}', [vendeursController::class, 'vendeurconfirm']);
+    Route::post('panier/add', [ProductController::class, 'Ajouteraupanier']);
+    // afficher le panier 
+    Route::get('/panier', [ProductController::class, 'Panier']);
+
+    //update panier item quantity
+    Route::post('panier/update', [ProductController::class, 'Panierupdate']);
+    //delete panier
+    Route::post('panier/delete', [ProductController::class, 'Panierdelete']);
+
+    // user login/register
+    Route::get('/user/login-register', [UserController::class, 'LoginRegister'])->name('login');
+    // User register 
+    Route::post('/user/register', [UserController::class, 'userRegister']);
+    // User login 
+    Route::post('user/login', [UserController::class, 'userLogin']);
+
+    Route::group(['middleware' => ['auth']], function () {
+        // user account 
+        Route::match(['get', 'post'], 'user/account', [UserController::class, 'userAccount']);
+        // user update password
+        Route::post('/user/update-password', [UserController::class, 'userUpdatePassword']);
+        // apply coupon 
+        Route::post('/apply-coupon', [ProductController::class, 'ApplyCoupon']);
+        //
+        Route::match(['get', 'post'], '/checkout', [ProductController::class, 'Checkout']);
+
+        ///get-delivery-address
+        Route::post('get-delivery-address', [AddressController::class, 'getDeliveryAddress']);
+
+         //save address
+         Route::post('save-address-address', [AddressController::class, 'saveDeliveryAddress']);
+
+         //remove address
+         Route::post('remove-address-address', [AddressController::class, 'removeDeliveryAddress']);
+         //thanks
+         Route::get('thanks', [ProductController::class, 'Thanks']);
+         // user commande 
+         Route::get('user/commandes/{id?}', [CommandesController::class, 'Commandes']);
+
+    });
+    
+   
+    Route::match(['get', 'post'],'user/forgot-password', [UserController::class, 'ForgotPassword']);
+    // confirm user 
+    Route::get('user/confirm/{code}', [UserController::class, 'confirmAcount']);
+    //User Logout
+    Route::get('user/deconnexion', [UserController::class, 'userDeconnexion']);
+
+
+
+
+
 
 });
 

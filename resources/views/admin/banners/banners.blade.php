@@ -16,7 +16,7 @@
                   @if (Session::has('success_message'))
                              <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>Success:</strong> {{ Session::get('success_message')}}
-                                <button type="button" class="Close" data-dismiss="alert" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 0; top: 0;">
                                    <span aria-hidden="true">&times;</span>
                                 </button>
                              </div>
@@ -37,10 +37,10 @@
                               Type
                           </th>
                           <th>
-                               Link
+                              Lien
                           </th>
                           <th>
-                               Title
+                               Titre
                           </th>
                           <th>
                                Alt
